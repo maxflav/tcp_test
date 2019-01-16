@@ -11,7 +11,13 @@ def sending(sock):
 
 def receiving(sock):
     while True:
-        print(sock.recv(1024).decode('utf-8'))
+        data = sock.recv(1024)
+        if not data:
+            print("Lost connection to server")
+            sock.close()
+            exit(1)
+
+        print('> ' + data.decode('utf-8'))
 
 
 if len(sys.argv) < 2:
