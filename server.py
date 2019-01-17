@@ -18,7 +18,7 @@ def await_new_connections():
             client, client_address = sock.accept()
             all_clients.append(client)
 
-            new_thread = threading.Thread(target=handle_client, args=(client, all_clients))
+            new_thread = threading.Thread(target=handle_client, args=(client,))
             new_thread.daemon = True
             new_thread.start()
 
@@ -28,7 +28,7 @@ def await_new_connections():
             client.close()
         sock.close()
 
-def handle_client(client, all_clients):
+def handle_client(client):
     try:
         while True:
             data = client.recv(1024)
